@@ -82,6 +82,7 @@ header .head_btn_left {
 
 header .head_btn_right {
   width: 25%;
+  justify-content: end;
 }
 
 header button {
