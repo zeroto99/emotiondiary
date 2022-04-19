@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 
 import './App.css';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
@@ -29,48 +29,24 @@ const reducer = (state, action) => {
     default:
       return state;
   }
+  localStorage.setItem('diary', JSON.stringify(newState));
   return newState;
 };
 
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
-const dummyData = [
-  {
-    id: 1, 
-    emotion: 1,
-    content: '오늘의 일기 1번',
-    date: 1649332119462,
-  },
-  {
-    id: 2, 
-    emotion: 2,
-    content: '오늘의 일기 2번',
-    date: 1649332119463,
-  },
-  {
-    id: 3, 
-    emotion: 3,
-    content: '오늘의 일기 3번',
-    date: 1649332119464,
-  },
-  {
-    id: 4, 
-    emotion: 4,
-    content: '오늘의 일기 4번',
-    date: 1649332119465,
-  },
-  {
-    id: 5, 
-    emotion: 5,
-    content: '오늘의 일기 5번',
-    date: 1649332119466,
-  }
-];
-
 function App() {
 
-  const [data, dispatch] = useReducer(reducer, dummyData);
+  useEffect(() => {
+    localStorage.setItem('item1', 10);
+    const item1 = parseInt(localStorage.getItem('item1'));
+    const item2 = localStorage.getItem('item2');
+    const item3 = JSON.parse(localStorage.getItem('item3'));
+    console.log({item1, item2, item3});
+  }, []);
+
+  const [data, dispatch] = useReducer(reducer, []);
 
   const dataId = useRef(6);
   
